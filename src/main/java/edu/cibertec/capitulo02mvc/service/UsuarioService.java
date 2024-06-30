@@ -27,4 +27,9 @@ public class UsuarioService implements IUsuarioService {
     public List<UsuarioDTO> listarUsuarios() {
         return usuarioDAO.listarUsuarios();
     }
+
+    @Override
+    public void eliminarUsuario(UsuarioDTO usuario) {
+        usuarioDAO.eliminarUsuario(usuario);
+    }
 }

@@ -77,6 +77,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
+                <th>#</th>
                 <th>Nombre Completo</th>
                 <th>Usuario</th>
                 <th>Clave</th>
@@ -85,8 +86,10 @@
             </tr>
             </thead>
             <tbody>
+            <% int c = 1; %>
             <% for (UsuarioDTO usuario : lista) { %>
             <tr>
+                <td><%= c++ %></td>
                 <td>
                     <img src="https://via.placeholder.com/40" class="avatar" alt="Avatar">
                     <%= usuario.getNombreCompleto() %>
@@ -97,7 +100,7 @@
                 <td>
                     <a href="#" class="text-primary me-2"><i
                             class="fas fa-edit"></i></a>
-                    <a href="#" class="text-danger"><i
+                    <a href="usuarioEliminar.do?id=<%= usuario.getId() %>" class="text-danger"><i
                             class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>

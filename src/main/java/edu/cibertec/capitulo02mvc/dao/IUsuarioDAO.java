@@ -8,4 +8,5 @@ public interface IUsuarioDAO {
     void insertarUsuario(UsuarioDTO usuario);
     List<UsuarioDTO> listarUsuarios();
     UsuarioDTO validarLogin(UsuarioDTO usuario);
+    void eliminarUsuario(UsuarioDTO usuario);
 }

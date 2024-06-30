@@ -5,22 +5,26 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class UsuarioDAO implements IUsuarioDAO {
 
     private List<UsuarioDTO> usuarios;
+    private AtomicInteger idCounter;
 
     public UsuarioDAO() {
         usuarios = new ArrayList<>();
-        usuarios.add(new UsuarioDTO("Juan", "qw3w5", "Juan Perez"));
-        usuarios.add(new UsuarioDTO("Carmen", "1wqe45", "Carmen Perez"));
-        usuarios.add(new UsuarioDTO("Jose", "123aw", "Jose Perez"));
-        usuarios.add(new UsuarioDTO("Manuel", "1as45", "Manuel Perez"));
+        idCounter = new AtomicInteger();
+        usuarios.add(new UsuarioDTO(idCounter.incrementAndGet(),"Juan", "qw3w5", "Juan Perez"));
+        usuarios.add(new UsuarioDTO(idCounter.incrementAndGet(),"Carmen", "1wqe45", "Carmen Perez"));
+        usuarios.add(new UsuarioDTO(idCounter.incrementAndGet(),"Jose", "123aw", "Jose Perez"));
+        usuarios.add(new UsuarioDTO(idCounter.incrementAndGet(),"Manuel", "1as45", "Manuel Perez"));
     }
 
     @Override
     public void insertarUsuario(UsuarioDTO usuario) {
+        usuario.setId(idCounter.incrementAndGet());
         usuarios.add(usuario);
     }
 
@@ -38,5 +42,10 @@ public class UsuarioDAO implements IUsuarioDAO {
             usuario = null;
 
         return usuario;
+    }
+
+    @Override
+    public void eliminarUsuario(UsuarioDTO usuario) {
+        usuarios.removeIf(u -> u.getId() == usuario.getId());
     }
 }

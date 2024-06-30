@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -67,5 +68,15 @@ public class UsuarioController {
         }
 
         return mv;
+    }
+
+    @RequestMapping("usuarioEliminar")
+    public ModelAndView eliminarUsuario(@RequestParam("id") int id) {
+        UsuarioDTO usuario = new UsuarioDTO();
+        usuario.setId(id);
+        usuarioService.eliminarUsuario(usuario);
+
+        return new ModelAndView("usuarioLista", "lista",
+                usuarioService.listarUsuarios());
     }
 }
