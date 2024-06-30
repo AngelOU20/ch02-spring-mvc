@@ -38,19 +38,25 @@
 
 <div class="container form-container">
     <h1>Datos del usuario</h1>
-    <form action="usuarioGrabar.do" method="post">
+    <mvc:form modelAttribute="usuarioBean" action="usuarioGrabar.do">
         <div class="form-floating mb-3">
             <div class="input-group">
                 <span class="input-group-text" id="user-icon"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario">
+                <mvc:input path="usuario" cssErrorClass="form-control text-box formFieldError"
+                           type="text" cssClass="form-control"
+                           id="usuario" name="usuario" placeholder="Usuario" />
             </div>
+            <mvc:errors path="usuario" cssClass="text-danger" />
         </div>
 
         <div class="form-floating mb-3">
             <div class="input-group">
                 <span class="input-group-text" id="password-icon"><i class="fas fa-lock"></i></span>
-                <input type="password" class="form-control" id="clave" name="clave" placeholder="Clave">
+                <mvc:input path="clave" cssErrorClass="form-control text-box formFieldError"
+                           type="password" cssClass="form-control"
+                           id="clave" name="clave" placeholder="Clave" />
             </div>
+            <mvc:errors path="clave" cssClass="text-danger" />
         </div>
 
         <div class="form-floating mb-3">
@@ -61,11 +67,14 @@
         </div>
 
         <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Insertar</button>
-            <a href="listaUsuarios.do" class="btn btn-secondary"><i
-                    class="fas fa-arrow-left"></i> Regresar</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Insertar
+            </button>
+            <a href="listaUsuarios.do" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </a>
         </div>
-    </form>
+    </mvc:form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
