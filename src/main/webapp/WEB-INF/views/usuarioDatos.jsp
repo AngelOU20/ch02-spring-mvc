@@ -22,9 +22,6 @@
         .form-container h1 {
             margin-bottom: 20px;
         }
-        .form-floating label {
-            margin-left: 2.5rem;
-        }
         .input-group-text {
             width: 2.5rem;
             text-align: center;
@@ -39,30 +36,36 @@
 <div class="container form-container">
     <h1>Datos del usuario</h1>
     <mvc:form modelAttribute="usuarioBean" action="usuarioGrabar.do">
-        <div class="form-floating mb-3">
+        <div class="mb-3">
+            <mvc:label path="usuario">Usuario:</mvc:label>
             <div class="input-group">
                 <span class="input-group-text" id="user-icon"><i class="fas fa-user"></i></span>
                 <mvc:input path="usuario" cssErrorClass="form-control text-box formFieldError"
                            type="text" cssClass="form-control"
-                           id="usuario" name="usuario" placeholder="Usuario" />
+                           id="usuario" name="usuario"
+                           placeholder="JuanV23" />
             </div>
-            <mvc:errors path="usuario" cssClass="text-danger" />
+            <mvc:errors path="usuario" cssClass="text-danger text-uppercase" />
         </div>
 
-        <div class="form-floating mb-3">
+        <div class="mb-3">
+            <mvc:label path="clave">Clave:</mvc:label>
             <div class="input-group">
                 <span class="input-group-text" id="password-icon"><i class="fas fa-lock"></i></span>
                 <mvc:input path="clave" cssErrorClass="form-control text-box formFieldError"
                            type="password" cssClass="form-control"
-                           id="clave" name="clave" placeholder="Clave" />
+                           id="clave" name="clave" placeholder="qw12fds" />
             </div>
-            <mvc:errors path="clave" cssClass="text-danger" />
+            <mvc:errors path="clave" cssClass="text-danger text-uppercase" />
         </div>
 
-        <div class="form-floating mb-3">
+        <div class="mb-3">
+            <mvc:label path="nombreCompleto">Nombre completo:</mvc:label>
             <div class="input-group">
                 <span class="input-group-text" id="name-icon"><i class="fas fa-id-card"></i></span>
-                <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" placeholder="Nombre Completo">
+                <input type="text" class="form-control"
+                       id="nombreCompleto" name="nombreCompleto"
+                       placeholder="Juan Valdez">
             </div>
         </div>
 
