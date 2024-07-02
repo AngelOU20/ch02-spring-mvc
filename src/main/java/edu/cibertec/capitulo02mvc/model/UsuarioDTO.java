@@ -16,6 +16,8 @@ public class UsuarioDTO {
     private String clave;
     private String nombreCompleto;
 
+    private byte[] foto;
+
     public UsuarioDTO() {
     }
 
@@ -57,5 +59,13 @@ public class UsuarioDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }
