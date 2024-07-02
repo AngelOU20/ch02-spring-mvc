@@ -1,5 +1,6 @@
 <%@page import="edu.cibertec.capitulo02mvc.model.UsuarioDTO"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.util.Base64" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -69,7 +70,7 @@
 </nav>
 
 <section class="container mt-5">
-    <h1>Listado de Usuarios</h1>
+    <h1>Listado de Usuarioss</h1>
     <br/>
     <a href="usuarioCrear.do" class="btn btn-primary">Crear Usuario</a>
     <% List<UsuarioDTO> lista = (List<UsuarioDTO>) request.getAttribute("lista"); %>
@@ -82,6 +83,7 @@
                 <th>Usuario</th>
                 <th>Clave</th>
                 <th>Estado</th>
+                <th>Foto</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -91,14 +93,25 @@
             <tr>
                 <td><%= c++ %></td>
                 <td>
-                    <img src="https://via.placeholder.com/40" class="avatar" alt="Avatar">
+                    <%
+                        String foto = usuario.getFoto() != null ?
+                                "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(usuario.getFoto()) :
+                                "https://via.placeholder.com/40";
+                    %>
+                    <img src="<%= foto %>" class="avatar" alt="Avatar">
+<%--                    <img src="https://via.placeholder.com/40" class="avatar" alt="Avatar">--%>
                     <%= usuario.getNombreCompleto() %>
                 </td>
                 <td><%= usuario.getUsuario() %></td>
                 <td><%= usuario.getClave() %></td>
                 <td><span class="status-badge status-active">Activo</span></td>
                 <td>
-                    <a href="#" class="text-primary me-2"><i
+                    <a href="mostrarFoto.do?idUsuario=<%= usuario.getId() %>">
+                        Ver foto
+                    </a>
+                </td>
+                <td>
+                    <a href="#" class="text-primary me-4"><i
                             class="fas fa-edit"></i></a>
                     <a href="usuarioEliminar.do?id=<%= usuario.getId() %>" class="text-danger"><i
                             class="fas fa-trash-alt"></i></a>
