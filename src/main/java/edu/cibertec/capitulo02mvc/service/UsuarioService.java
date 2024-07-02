@@ -32,4 +32,9 @@ public class UsuarioService implements IUsuarioService {
     public void eliminarUsuario(UsuarioDTO usuario) {
         usuarioDAO.eliminarUsuario(usuario);
     }
+
+    @Override
+    public UsuarioDTO obtenerUsuario(int id) {
+        return usuarioDAO.obtenerUsuario(id);
+    }
 }

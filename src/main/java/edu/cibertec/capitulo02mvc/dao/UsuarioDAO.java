@@ -48,4 +48,16 @@ public class UsuarioDAO implements IUsuarioDAO {
     public void eliminarUsuario(UsuarioDTO usuario) {
         usuarios.removeIf(u -> u.getId() == usuario.getId());
     }
+
+    @Override
+    public UsuarioDTO obtenerUsuario(int id) {
+        UsuarioDTO resp = null;
+        for(UsuarioDTO usuario : usuarios) {
+            if(usuario.getId() == id) {
+                resp = usuario;
+                break;
+            }
+        }
+        return resp;
+    }
 }
