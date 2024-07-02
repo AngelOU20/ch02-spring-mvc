@@ -9,4 +9,5 @@ public interface IUsuarioService {
     void insertarUsuario(UsuarioDTO usuario);
     List<UsuarioDTO> listarUsuarios();
     void eliminarUsuario(UsuarioDTO usuario);
+    UsuarioDTO obtenerUsuario(int id);
 }
