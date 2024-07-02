@@ -5,12 +5,15 @@ import edu.cibertec.capitulo02mvc.model.UsuarioDTO;
 import edu.cibertec.capitulo02mvc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -76,6 +79,23 @@ public class UsuarioController {
         usuario.setId(id);
         usuarioService.eliminarUsuario(usuario);
 
+        return new ModelAndView("usuarioLista", "lista",
+                usuarioService.listarUsuarios());
+    }
+
+    @RequestMapping("mostrarFoto")
+    public String mostrarFoto(HttpServletRequest request, Model model) {
+        model.addAttribute("usuario", usuarioService.
+                obtenerUsuario(Integer.parseInt(request.getParameter("idUsuario"))));
+
+        return "fotoUsuario";
+    }
+
+    @RequestMapping("registrarFoto")
+    public ModelAndView registrarFoto(@RequestParam("archivo") CommonsMultipartFile archivo,
+                                      @RequestParam("idUsuario") int id) {
+        UsuarioDTO usuario = usuarioService.obtenerUsuario(id);
+        usuario.setFoto(archivo.getBytes());
         return new ModelAndView("usuarioLista", "lista",
                 usuarioService.listarUsuarios());
     }
