@@ -87,9 +87,15 @@
         <input type="hidden" name="idUsuario"
                value="<%=(((UsuarioDTO) request.getAttribute("usuario")).getId())%>">
 
-        <button type="submit" class="btn btn-primary">
-            <i class="fas fa-save"></i> Grabar foto
-        </button>
+        <div class="d-flex align-items-center justify-content-between">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Grabar foto
+            </button>
+
+            <a href="listaUsuarios.do" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </a>
+        </div>
 <%--        <input type="submit" class="btn btn-primary" value="Grabar foto">--%>
     </form>
 
