@@ -6,10 +6,12 @@ import edu.cibertec.capitulo02mvc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@SessionAttributes("contador")
 public class UsuarioController {
 
     @Autowired
@@ -39,12 +42,13 @@ public class UsuarioController {
         } else {
             mv = new ModelAndView("usuarioLista", "lista",
                     usuarioService.listarUsuarios());
+            mv.addObject("contador", 0);
         }
         return mv;
     }
 
     @RequestMapping("listaUsuarios")
-    public ModelAndView listaUsuarios(UsuarioDTO usuario) {
+    public ModelAndView listaUsuarios() {
         List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
         return new ModelAndView("usuarioLista", "lista", usuarios);
     }
@@ -58,16 +62,20 @@ public class UsuarioController {
     @RequestMapping("usuarioGrabar")
     public ModelAndView grabarUsuario(
             @Valid @ModelAttribute("usuarioBean") UsuarioDTO usuario,
-            BindingResult resulta) {
+            BindingResult resulta, ModelMap modelo) {
 
         ModelAndView mv = null;
 
         if (resulta.hasErrors()) {
-            mv = new ModelAndView("usuarioDatos", "usuarioBean", usuario);
+            mv = new ModelAndView("usuarioDatos", "usuarioBean",
+                    usuario);
         } else {
             usuarioService.insertarUsuario(usuario);
             mv = new ModelAndView("usuarioLista", "lista",
                     usuarioService.listarUsuarios());
+            int contador = (int) modelo.get("contador");
+            contador++;
+            mv.addObject("contador", contador);
         }
 
         return mv;

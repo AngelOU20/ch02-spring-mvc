@@ -70,9 +70,14 @@
 </nav>
 
 <section class="container mt-5">
-    <h1>Listado de Usuarioss</h1>
+    <h1>Listado de Usuarios</h1>
     <br/>
-    <a href="usuarioCrear.do" class="btn btn-primary">Crear Usuario</a>
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="usuarioCrear.do" class="btn btn-primary">Crear Usuario</a>
+        <p class="text-body-tertiary fw-medium">
+            Usuarios creados en esta sesión: ${sessionScope.contador}
+        </p>
+    </div>
     <% List<UsuarioDTO> lista = (List<UsuarioDTO>) request.getAttribute("lista"); %>
     <div class="container table-container mt-5">
         <table class="table table-hover">
